@@ -6,7 +6,16 @@ import { Label } from "./components/ui/label";
 import { Forward } from "lucide-react";
 
 function App() {
-  const [token, setToken] = useState("");
+  const [formula, setFormula] = useState("");
+
+  const tokenize = (formula: string) => {
+    const tokens: string[] = [];
+
+    for (let i = 0; i < formula.length; i++) {
+      tokens.push(formula[i]);
+      console.log(tokens[i]);
+    }
+  };
 
   return (
     <>
@@ -16,7 +25,7 @@ function App() {
 
       <ButtonGroup>
         <ButtonGroup>
-          <Button onClick={() => console.log(token)}>
+          <Button onClick={() => tokenize(formula)}>
             <Forward />
           </Button>
         </ButtonGroup>
@@ -26,7 +35,7 @@ function App() {
               id="formula"
               type="text"
               placeholder="(p -> q) & !q | !p"
-              onChange={(event) => setToken(event.target.value)}
+              onChange={(event) => setFormula(event.target.value)}
             />
           </InputGroup>
         </ButtonGroup>
