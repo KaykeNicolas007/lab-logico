@@ -4,15 +4,18 @@ import { ButtonGroup } from "./components/ui/button-group";
 import { Button } from "./components/ui/button";
 import { Label } from "./components/ui/label";
 import { Forward } from "lucide-react";
+import type { Token } from "./types/token";
 
 function App() {
   const [formula, setFormula] = useState("");
 
   const tokenize = (formula: string) => {
-    const tokens: string[] = [];
+    const tokens: Token[] = [];
 
     for (let i = 0; i < formula.length; i++) {
-      tokens.push(formula[i]);
+      if (RegExp("[a-z]").test(formula[i])) {
+        tokens.push({ type: "VAR", value: formula[i], position: i });
+      }
       console.log(tokens[i]);
     }
   };
