@@ -13,9 +13,16 @@ function App() {
     const treatedFormula: string = formula.replace(/\s/g, "");
     const tokens: Token[] = [];
 
+    if (RegExp("[a-z][a-z]+").test(formula)) {
+      console.error(
+        "Duas variáveis em sequência não representam um fórmula bem formada.",
+      );
+      return;
+    }
+
     for (let i = 0; i < treatedFormula.length; i++) {
       if (RegExp("[a-z]").test(treatedFormula[i])) {
-        tokens.push({ type: "VAR", value: treatedFormula[i], position: i });
+        tokens.push({ type: "VAR", value: treatedFormula[i] });
       }
       console.log(tokens[i]);
     }
