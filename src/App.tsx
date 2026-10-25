@@ -10,11 +10,12 @@ function App() {
   const [formula, setFormula] = useState("");
 
   const tokenize = (formula: string) => {
+    const treatedFormula: string = formula.replace(/\s/g, "");
     const tokens: Token[] = [];
 
-    for (let i = 0; i < formula.length; i++) {
-      if (RegExp("[a-z]").test(formula[i])) {
-        tokens.push({ type: "VAR", value: formula[i], position: i });
+    for (let i = 0; i < treatedFormula.length; i++) {
+      if (RegExp("[a-z]").test(treatedFormula[i])) {
+        tokens.push({ type: "VAR", value: treatedFormula[i], position: i });
       }
       console.log(tokens[i]);
     }
