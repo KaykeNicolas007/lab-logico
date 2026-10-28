@@ -4,34 +4,10 @@ import { ButtonGroup } from "./components/ui/button-group";
 import { Button } from "./components/ui/button";
 import { Label } from "./components/ui/label";
 import { Forward } from "lucide-react";
-import type { Token } from "./types/token";
+import { Tokenize } from "./lib/tokenize";
 
 function App() {
   const [formula, setFormula] = useState("");
-
-  const tokenize = (formula: string) => {
-    const treatedFormula: string = formula.replace(/\s/g, "");
-    const tokens: Token[] = [];
-
-    if (RegExp("[A-z][A-z]+").test(formula)) {
-      console.error(
-        "Duas variáveis em sequência não representam um fórmula bem formada.",
-      );
-      return;
-    }
-
-    for (let i = 0; i < treatedFormula.length; i++) {
-      if (RegExp("[As-z]").test(treatedFormula[i])) {
-        tokens.push({ type: "VAR", value: treatedFormula[i] });
-      } else {
-        console.error(
-          "Um símbolo não identificado pela aplicação foi encontrado. Não será possível realizar qualquer operação.",
-        );
-        return;
-      }
-      console.log(tokens[i]);
-    }
-  };
 
   return (
     <>
@@ -41,7 +17,7 @@ function App() {
 
       <ButtonGroup>
         <ButtonGroup>
-          <Button onClick={() => tokenize(formula)}>
+          <Button onClick={() => Tokenize(formula)}>
             <Forward />
           </Button>
         </ButtonGroup>
